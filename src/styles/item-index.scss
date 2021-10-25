@@ -1,0 +1,115 @@
+.item__index {
+  display: inline-block;
+  &__sections {
+    display: flex;
+  }
+
+  // Buttons
+  &__item {
+    &__add,
+    &__add__close,
+    &__save,
+    &__edit {
+      margin: 7px 21px 7px 31px;
+      height: 25px;
+      width: 25px;
+    }
+    &__save {
+      background-color: #98d283;
+    }
+    &__add__close {
+      background-color: red;
+    }
+  }
+  // Headings
+  &__value__heading,
+  &__item__heading,
+  &__value__heading,
+  &__profession__heading,
+  &__status__heading,
+  &__from__heading,
+  &__updated__heading {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: #f0f5f9;
+    background-color: #52616b;
+    padding: 10px 0;
+    border: 1px solid #000000;
+  }
+
+  // Data
+  &__value__data,
+  &__item__data,
+  &__value__data,
+  &__profession__data,
+  &__status__data,
+  &__from__data,
+  &__updated__data {
+    font-family: Roboto;
+    font-style: normal;
+    font-size: 18px;
+    text-align: center;
+    padding: 9px 0;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+  }
+
+  //Column widths
+  &__item {
+    &__heading,
+    &__data {
+      width: 270px;
+    }
+  }
+
+  &__value {
+    &__heading,
+    &__data {
+      width: 130px;
+    }
+  }
+  &__profession {
+    &__heading,
+    &__data {
+      width: 219px;
+    }
+  }
+  &__status {
+    &__heading,
+    &__data {
+      width: 143px;
+    }
+  }
+  &__from {
+    &__heading,
+    &__data {
+      width: 270px;
+    }
+  }
+  &__updated {
+    &__heading,
+    &__data {
+      width: 270px;
+    }
+  }
+
+  &__column__close {
+    border-top: 1px solid #000000;
+    width: 1314px;
+    margin-left: 77px;
+  }
+
+  //input
+  &__input {
+    font-family: Roboto;
+    font-style: normal;
+    font-size: 18px;
+    text-align: center;
+    width: 90%;
+    height: 100%;
+    margin: 0;
+  }
+}

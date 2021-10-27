@@ -10,7 +10,7 @@ export const ItemIndex = () => {
   const [newDropdown, setNewDropdown] = useState(false);
   const [newItem, setNewItem] = useState();
   const [newValue, setNewValue] = useState();
-  const [newProfession, setNewProfession] = useState();
+  const [newSource, setNewSource] = useState();
   const [newStatus, setNewStatus] = useState();
   const [newFrom, setNewFrom] = useState();
   const [newUpdated, setNewUpdated] = useState(); // potential issue for different timezones
@@ -20,7 +20,7 @@ export const ItemIndex = () => {
     item.push({
       item: newItem,
       value: newValue,
-      profession: newProfession,
+      profession: newSource,
       status: newStatus,
       from: newFrom,
       updated: newUpdated,
@@ -29,18 +29,21 @@ export const ItemIndex = () => {
     setNewDropdown();
     setNewItem();
     setNewValue();
-    setNewProfession();
+    setNewSource();
     setNewStatus();
     setNewFrom();
     setNewUpdated();
     console.log(item);
   };
 
+  console.log(newSource);
+
   /** To do,
-   * 1. Add dropdown to profession &  status
-   * 2. Add condition to save button -> if all fields aren't complete do not submit -> else popup telling user what to do.
-   * 3. Add editting functionality.
-   * 4. Connect to database.
+   * 1. Add dropdown to profession & status (done)
+   * 2. Re-name trade skill/ profession to source to include drops, crafted and other
+   * 3. Add condition to save button -> if all fields aren't complete do not submit -> else popup telling user what to do.
+   * 4. Add editting functionality to existing entries.
+   * 5. Connect to database.
    */
 
   return (
@@ -71,7 +74,7 @@ export const ItemIndex = () => {
           ) : null}
           <div className="item__index__item__heading">Item</div>
           <div className="item__index__value__heading">Value</div>
-          <div className="item__index__profession__heading">Profession</div>
+          <div className="item__index__profession__heading">Source</div>
           <div className="item__index__status__heading">Status</div>
           <div className="item__index__from__heading">From</div>
           <div className="item__index__updated__heading">Updated</div>
@@ -106,18 +109,29 @@ export const ItemIndex = () => {
               />
             </div>
             <div className="item__index__profession__data">
-              <input
-                placeholder="Profession"
-                className="item__index__input"
-                type="text"
-                value={newProfession}
+              <select
+                className="item__index__select"
                 onChange={function (e) {
-                  setNewProfession(e.target.value);
+                  setNewSource(e.target.value);
                 }}
-              />
+              >
+                <option value={undefined}>select*</option>
+                <option value="Drop">Drop</option>
+                <option value="Logging">Logging</option>
+                <option value="Mining">Mining</option>
+                <option value="Fishing">Fishing</option>
+                <option value="Harvesting">Harvesting</option>
+                <option value="Tracking & Skinning">Tracking & Skinning</option>
+                <option value="Smelthing">Smelthing</option>
+                <option value="Woodworking">Woodworking</option>
+                <option value="Leatherworking">Leatherworking</option>
+                <option value="Weaving">Weaving</option>
+                <option value="Stonecutting">Stonecutting</option>
+                <option value="Stonecutting">Other</option>
+              </select>
             </div>
             <div className="item__index__status__data">
-              <input
+              {/* <input
                 placeholder="Raw/Refined"
                 className="item__index__input"
                 type="text"
@@ -125,11 +139,23 @@ export const ItemIndex = () => {
                 onChange={function (e) {
                   setNewStatus(e.target.value);
                 }}
-              />
+              /> */}
+              <select
+                className="item__index__select"
+                onChange={function (e) {
+                  setNewSource(e.target.value);
+                }}
+              >
+                <option value={undefined}>select*</option>
+                <option value="Raw">Raw</option>
+                <option value="Refined">Refined</option>
+                <option value="Crafted">Crafted</option>
+                <option value="Looted">Looted</option>
+              </select>
             </div>
             <div className="item__index__from__data">
               <input
-                placeholder="Source"
+                placeholder="Collected From"
                 className="item__index__input"
                 type="text"
                 value={newFrom}

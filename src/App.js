@@ -5,6 +5,7 @@ import "@fontsource/roboto";
 
 import {index} from "./pages";
 import {ItemIndex} from "./pages/item-index";
+import {PriceHistory} from "./pages/price-history";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={index} />
         <Route path="/item-index" exact component={ItemIndex} />
+        <Route path="/price-history" exact component={PriceHistory} />
       </Switch>
     </Router>
   );

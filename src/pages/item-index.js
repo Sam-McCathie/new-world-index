@@ -24,7 +24,7 @@ export const ItemIndex = () => {
       status: newStatus,
       from: newFrom,
       updated: newUpdated,
-      priceHistory: {value: newValue, updated: newUpdated},
+      priceHistory: {price: newValue, date: newUpdated},
     });
     setNewDropdown();
     setNewItem();

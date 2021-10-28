@@ -2,7 +2,7 @@ export const item = [
   {
     item: "Greenwood",
     value: 0.15,
-    profession: "woodcut",
+    source: "woodcut",
     status: "Raw",
     from: "Young Trees",
     updated: "date here",
@@ -17,7 +17,7 @@ export const item = [
   {
     item: "Iron Ore",
     value: 0.37,
-    profession: "mineboy",
+    source: "mineboy",
     status: "Raw",
     from: "Iron Nodes",
     updated: "date here",

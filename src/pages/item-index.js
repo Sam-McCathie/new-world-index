@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import "../styles/item-index.scss";
+import Axios from "axios";
+
 import {item} from "../data/items";
 
 var moment = require("moment"); // require
@@ -13,30 +15,48 @@ export const ItemIndex = () => {
   const [newSource, setNewSource] = useState();
   const [newStatus, setNewStatus] = useState();
   const [newFrom, setNewFrom] = useState();
-  const [newUpdated, setNewUpdated] = useState(); // potential issue for different timezones
+  const [newUpdated, setNewUpdated] = useState();
 
-  const SaveNewItem = () => {
+  const addItem = () => {
     setNewDropdown(false);
-    item.push({
+    Axios.post("http://localhost:3001/add-item", {
       item: newItem,
       value: newValue,
-      profession: newSource,
+      source: newSource,
       status: newStatus,
       from: newFrom,
       updated: newUpdated,
-      priceHistory: {price: newValue, date: newUpdated},
+      priceHistory: JSON.stringify({price: newValue, date: newUpdated}),
+    }).then(() => {
+      setNewItem();
+      setNewValue();
+      setNewSource();
+      setNewStatus();
+      setNewFrom();
+      setNewUpdated();
     });
-    setNewDropdown();
-    setNewItem();
-    setNewValue();
-    setNewSource();
-    setNewStatus();
-    setNewFrom();
-    setNewUpdated();
-    console.log(item);
   };
 
-  console.log(newSource);
+  // const SaveNewItem = () => {
+  //   setNewDropdown(false);
+  //   item.push({
+  //     item: newItem,
+  //     value: newValue,
+  //     source: newSource,
+  //     status: newStatus,
+  //     from: newFrom,
+  //     updated: newUpdated,
+  //     priceHistory: {price: newValue, date: newUpdated},
+  //   });
+  //   setNewDropdown();
+  //   setNewItem();
+  //   setNewValue();
+  //   setNewSource();
+  //   setNewStatus();
+  //   setNewFrom();
+  //   setNewUpdated();
+  //   console.log(item);
+  // };
 
   /** To do,
    * 1. Add dropdown to profession & status (done)
@@ -82,7 +102,7 @@ export const ItemIndex = () => {
         {/* Add item */}
         {newDropdown ? (
           <div className="item__index__sections">
-            <button className="item__index__item__save" onClick={SaveNewItem}>
+            <button className="item__index__item__save" onClick={addItem}>
               S
             </button>
             <div className="item__index__item__data">
@@ -131,19 +151,10 @@ export const ItemIndex = () => {
               </select>
             </div>
             <div className="item__index__status__data">
-              {/* <input
-                placeholder="Raw/Refined"
-                className="item__index__input"
-                type="text"
-                value={newStatus}
-                onChange={function (e) {
-                  setNewStatus(e.target.value);
-                }}
-              /> */}
               <select
                 className="item__index__select"
                 onChange={function (e) {
-                  setNewSource(e.target.value);
+                  setNewStatus(e.target.value);
                 }}
               >
                 <option value={undefined}>select*</option>
@@ -182,9 +193,7 @@ export const ItemIndex = () => {
               <button className="item__index__item__edit">E</button>
               <div className="item__index__item__data">{item.item}</div>
               <div className="item__index__value__data">{item.value}</div>
-              <div className="item__index__profession__data">
-                {item.profession}
-              </div>
+              <div className="item__index__profession__data">{item.source}</div>
               <div className="item__index__status__data">{item.status}</div>
               <div className="item__index__from__data">{item.from}</div>
               <div className="item__index__updated__data">{item.updated}</div>

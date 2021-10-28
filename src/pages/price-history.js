@@ -16,7 +16,6 @@ let dates = [];
 for (let i = 0; i < selectedItem.priceHistory.length; i++) {
   dates.push(selectedItem.priceHistory[i].date);
 }
-console.log(dates);
 
 const options = {
   scales: {

@@ -1,20 +1,28 @@
 import React, {useEffect, useState} from "react";
+import Axios from "axios";
 
 const IndexItem = (props) => {
   const [editStatus, setEditStatus] = useState("default");
-  const [newPrice, setNewPrice] = useState();
 
-  console.log(newPrice);
+  // Complete setting up below and replace strings from put request
+  const [updatedItem, setUpdatedItem] = useState();
+  const [updatedValue, setUpdatedValue] = useState();
+  const [updatedSource, setUpdatedSource] = useState();
+  const [updatedStatus, setUpdatedStatus] = useState();
+  const [updatedFromWhat, setUpdatedFromWhat] = useState();
+  const [updatedUpdated, setUpdatedUpdated] = useState(); // date
+  const [updatedPriceHistroy, setUpdatedPriceHistory] = useState();
+  // Make sure new price is pushed to old pricec history JSON
 
   useEffect(() => {
-    if (newPrice && editStatus === "edit") {
+    if (updatedValue && editStatus === "edit") {
       setEditStatus("save");
       console.log("new price");
-    } else if (!newPrice && editStatus === "save") {
+    } else if (!updatedValue && editStatus === "save") {
       setEditStatus("edit");
       console.log("no price");
     }
-  }, [newPrice]);
+  }, [updatedValue]);
 
   const startEdit = () => {
     setEditStatus("edit");
@@ -24,13 +32,28 @@ const IndexItem = (props) => {
     setEditStatus("default");
   };
 
-  const saveEdit = () => {
-    setEditStatus("default");
-    setNewPrice();
+  const saveEdit = (itemid) => {
+    // setEditStatus("default");
+    // setUpdatedValue();
     console.log("price edited");
+    Axios.put("http://localhost:3001/update", {
+      item: "huh",
+      value: updatedValue,
+      source: "test",
+      status: "test",
+      fromWhat: "test",
+      updated: "test",
+      priceHistory: JSON.stringify({hmmm: "test", daaa: "test"}),
+      itemid: itemid,
+    }).then((response) => {
+      alert("updated");
+      console.log(response);
+      // setAllItems(response.data);
+      // console.log(response);
+      // console.log(allItems);
+    });
   };
 
-  console.log(editStatus);
   return (
     <div className="item__index__sections" key={props.item}>
       {editStatus === "default" ? (
@@ -44,7 +67,12 @@ const IndexItem = (props) => {
         </button>
       ) : null}
       {editStatus === "save" ? (
-        <button className="item__index__item__edit" onClick={saveEdit}>
+        <button
+          className="item__index__item__edit"
+          onClick={() => {
+            saveEdit(props.itemid);
+          }}
+        >
           S
         </button>
       ) : null}
@@ -58,9 +86,9 @@ const IndexItem = (props) => {
             placeholder={props.value}
             className="item__index__input"
             type="number"
-            value={newPrice}
+            value={updatedValue}
             onChange={function (e) {
-              setNewPrice(e.target.value);
+              setUpdatedValue(e.target.value);
             }}
           />
         )}

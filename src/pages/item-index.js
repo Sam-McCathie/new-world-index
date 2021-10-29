@@ -41,6 +41,10 @@ export const ItemIndex = () => {
     });
   };
 
+  useEffect(() => {
+    getAllItems();
+  }, []);
+
   const getAllItems = () => {
     Axios.get("http://localhost:3001/all-items").then((response) => {
       setAllItems(response.data);
@@ -48,31 +52,6 @@ export const ItemIndex = () => {
       console.log(allItems);
     });
   };
-
-  useEffect(() => {
-    getAllItems();
-  }, []);
-
-  // const SaveNewItem = () => {
-  //   setNewDropdown(false);
-  //   item.push({
-  //     item: newItem,
-  //     value: newValue,
-  //     source: newSource,
-  //     status: newStatus,
-  //     from: newFrom,
-  //     updated: newUpdated,
-  //     priceHistory: {price: newValue, date: newUpdated},
-  //   });
-  //   setNewDropdown();
-  //   setNewItem();
-  //   setNewValue();
-  //   setNewSource();
-  //   setNewStatus();
-  //   setNewFrom();
-  //   setNewUpdated();
-  //   console.log(item);
-  // };
 
   /** To do,
    * 1. Add dropdown to profession & status (done)
@@ -207,6 +186,7 @@ export const ItemIndex = () => {
           ? allItems.map((item) => {
               return (
                 <IndexItem
+                  itemid={item.itemid}
                   key={item.item}
                   item={item.item}
                   value={item.value}

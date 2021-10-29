@@ -50,6 +50,30 @@ app.get("/all-items", (req, res) => {
   });
 });
 
+app.put("/update", (req, res) => {
+  const itemid = req.body.itemid;
+  const item = req.body.item;
+  const value = req.body.value;
+  const source = req.body.source;
+  const status = req.body.status;
+  const fromWhat = req.body.from;
+  const updated = req.body.updated;
+  const priceHistory = req.body.priceHistory;
+
+  db.query(
+    "UPDATE item_index SET item = ?, value = ?, source = ?,status = ?, fromWhat = ?, updated = ?, priceHistory = ? WHERE itemid = ?",
+    [item, value, source, status, fromWhat, updated, priceHistory, itemid],
+
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

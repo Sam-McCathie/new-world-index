@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import "../styles/item-index.scss";
 import Axios from "axios";
+import IndexItem from "../components/index-item";
 
 import {item} from "../data/items";
 
@@ -16,6 +17,8 @@ export const ItemIndex = () => {
   const [newStatus, setNewStatus] = useState();
   const [newFrom, setNewFrom] = useState();
   const [newUpdated, setNewUpdated] = useState();
+
+  const [allItems, setAllItems] = useState();
 
   const addItem = () => {
     setNewDropdown(false);
@@ -34,8 +37,21 @@ export const ItemIndex = () => {
       setNewStatus();
       setNewFrom();
       setNewUpdated();
+      getAllItems();
     });
   };
+
+  const getAllItems = () => {
+    Axios.get("http://localhost:3001/all-items").then((response) => {
+      setAllItems(response.data);
+      console.log(response);
+      console.log(allItems);
+    });
+  };
+
+  useEffect(() => {
+    getAllItems();
+  }, []);
 
   // const SaveNewItem = () => {
   //   setNewDropdown(false);
@@ -187,19 +203,21 @@ export const ItemIndex = () => {
           </div>
         ) : null}
         {/* Map the below -> each item will need its own state so it can be changed dynamically*/}
-        {item.map((item) => {
-          return (
-            <div className="item__index__sections" key={item.item}>
-              <button className="item__index__item__edit">E</button>
-              <div className="item__index__item__data">{item.item}</div>
-              <div className="item__index__value__data">{item.value}</div>
-              <div className="item__index__profession__data">{item.source}</div>
-              <div className="item__index__status__data">{item.status}</div>
-              <div className="item__index__from__data">{item.from}</div>
-              <div className="item__index__updated__data">{item.updated}</div>
-            </div>
-          );
-        })}
+        {allItems !== undefined
+          ? allItems.map((item) => {
+              return (
+                <IndexItem
+                  key={item.item}
+                  item={item.item}
+                  value={item.value}
+                  source={item.source}
+                  status={item.status}
+                  fromWhat={item.fromWhat}
+                  updated={item.updated}
+                />
+              );
+            })
+          : null}
         <div className="item__index__column__close"></div>
       </div>
     </div>

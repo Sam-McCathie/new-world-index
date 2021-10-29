@@ -40,6 +40,16 @@ app.post("/add-item", (req, res) => {
   );
 });
 
+app.get("/all-items", (req, res) => {
+  db.query("SELECT * FROM item_index", (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

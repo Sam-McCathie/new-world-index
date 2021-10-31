@@ -21,7 +21,7 @@ app.post("/add-item", (req, res) => {
   const value = req.body.value;
   const source = req.body.source;
   const status = req.body.status;
-  const fromWhat = req.body.from;
+  const fromWhat = req.body.fromWhat;
   const updated = req.body.updated;
   const priceHistory = req.body.priceHistory;
 
@@ -56,7 +56,7 @@ app.put("/update", (req, res) => {
   const value = req.body.value;
   const source = req.body.source;
   const status = req.body.status;
-  const fromWhat = req.body.from;
+  const fromWhat = req.body.fromWhat;
   const updated = req.body.updated;
   const priceHistory = req.body.priceHistory;
 

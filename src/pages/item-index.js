@@ -3,8 +3,6 @@ import "../styles/item-index.scss";
 import Axios from "axios";
 import IndexItem from "../components/index-item";
 
-import {item} from "../data/items";
-
 var moment = require("moment"); // require
 moment().format();
 
@@ -16,9 +14,10 @@ export const ItemIndex = () => {
   const [newSource, setNewSource] = useState();
   const [newStatus, setNewStatus] = useState();
   const [newFrom, setNewFrom] = useState();
-  const [newUpdated, setNewUpdated] = useState();
 
   const [allItems, setAllItems] = useState();
+
+  // console.log({price: newValue, date: newUpdated});
 
   const addItem = () => {
     setNewDropdown(false);
@@ -27,16 +26,17 @@ export const ItemIndex = () => {
       value: newValue,
       source: newSource,
       status: newStatus,
-      from: newFrom,
-      updated: newUpdated,
-      priceHistory: JSON.stringify({price: newValue, date: newUpdated}),
+      fromWhat: newFrom,
+      updated: moment().format("h:mm a - D MMM"),
+      priceHistory: JSON.stringify([
+        {price: newValue, date: moment().format("h:mm a - D MMM")},
+      ]),
     }).then(() => {
       setNewItem();
       setNewValue();
       setNewSource();
       setNewStatus();
       setNewFrom();
-      setNewUpdated();
       getAllItems();
     });
   };
@@ -48,10 +48,10 @@ export const ItemIndex = () => {
   const getAllItems = () => {
     Axios.get("http://localhost:3001/all-items").then((response) => {
       setAllItems(response.data);
-      console.log(response);
-      console.log(allItems);
     });
   };
+
+  // console.log(allItems[5].priceHistory.push("test"));
 
   /** To do,
    * 1. Add dropdown to profession & status (done)
@@ -108,7 +108,6 @@ export const ItemIndex = () => {
                 value={newItem}
                 onChange={function (e) {
                   setNewItem(e.target.value);
-                  setNewUpdated(moment().format("h:mm a - D MMM"));
                 }}
               />
             </div>
@@ -182,6 +181,7 @@ export const ItemIndex = () => {
           </div>
         ) : null}
         {/* Map the below -> each item will need its own state so it can be changed dynamically*/}
+        {console.log(allItems)}{" "}
         {allItems !== undefined
           ? allItems.map((item) => {
               return (
@@ -194,6 +194,7 @@ export const ItemIndex = () => {
                   status={item.status}
                   fromWhat={item.fromWhat}
                   updated={item.updated}
+                  priceHistory={item.priceHistory}
                 />
               );
             })

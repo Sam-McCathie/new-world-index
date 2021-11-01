@@ -75,6 +75,16 @@ const IndexItem = (props) => {
     });
   };
 
+  const deleteItem = (itemid) => {
+    Axios.delete(`http://localhost:3001/delete/${itemid}`);
+    alert("Item deleted");
+    props.setAllItems(
+      props.allItems.filter((i) => {
+        return i.itemid !== itemid;
+      })
+    );
+  };
+
   return (
     <div className="item__index__sections" key={props.item}>
       {editStatus === "default" ? (
@@ -127,17 +137,6 @@ const IndexItem = (props) => {
             }}
           />
         )}
-
-        {console.log(typeof updatedValue)}
-        {/* <input
-                placeholder="0.01"
-                className="item__index__input"
-                type="number"
-                value={newValue}
-                onChange={function (e) {
-                  setNewValue(e.target.value);
-                }}
-              /> */}
       </div>
 
       <div className="item__index__profession__data">
@@ -187,6 +186,32 @@ const IndexItem = (props) => {
         )}
       </div>
       <div className="item__index__updated__data">{props.updated}</div>
+      {editStatus === "default" ? (
+        <button
+          className="item__index__item__edit"
+          onClick={() => {
+            deleteItem(props.itemid);
+            console.log(`Clicked remove - ${props.itemid}`);
+          }}
+        >
+          D
+        </button>
+      ) : null}
+      {editStatus === "edit" ? (
+        <button className="item__index__item__edit" onClick={cancelEdit}>
+          X
+        </button>
+      ) : null}
+      {editStatus === "save" ? (
+        <button
+          className="item__index__item__edit"
+          onClick={() => {
+            saveEdit(props.itemid);
+          }}
+        >
+          S
+        </button>
+      ) : null}
     </div>
   );
 };

@@ -7,6 +7,8 @@ var moment = require("moment"); // require
 moment().format();
 
 export const ItemIndex = () => {
+  const [allItems, setAllItems] = useState();
+
   // New item
   const [newDropdown, setNewDropdown] = useState(false);
   const [newItem, setNewItem] = useState();
@@ -14,10 +16,6 @@ export const ItemIndex = () => {
   const [newSource, setNewSource] = useState();
   const [newStatus, setNewStatus] = useState();
   const [newFrom, setNewFrom] = useState();
-
-  const [allItems, setAllItems] = useState();
-
-  // console.log({price: newValue, date: newUpdated});
 
   const addItem = () => {
     setNewDropdown(false);
@@ -37,7 +35,17 @@ export const ItemIndex = () => {
       setNewSource();
       setNewStatus();
       setNewFrom();
-      getAllItems();
+      setAllItems([
+        ...allItems,
+        {
+          item: newItem,
+          value: newValue,
+          source: newSource,
+          status: newStatus,
+          fromWhat: newFrom,
+          updated: moment().format("h:mm a - D MMM"),
+        },
+      ]);
     });
   };
 
@@ -186,6 +194,8 @@ export const ItemIndex = () => {
           ? allItems.map((item) => {
               return (
                 <IndexItem
+                  allItems={allItems}
+                  setAllItems={setAllItems}
                   itemid={item.itemid}
                   key={item.item}
                   item={item.item}

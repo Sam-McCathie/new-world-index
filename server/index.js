@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3001;
+const PORT = 3001;
 const mysql = require("mysql2");
 const cors = require("cors");
 
@@ -9,10 +9,15 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  user: process.env.REACT_APP_USER,
-  host: process.env.REACT_APP_HOST,
-  password: process.env.REACT_APP_PASSWORD,
-  database: process.env.REACT_APP_DATABASE,
+  user: process.env.REACT_APP_USER_LOCAL,
+  host: process.env.REACT_APP_HOST_LOCAL,
+  password: process.env.REACT_APP_PASSWORD_LOCAL,
+  database: process.env.REACT_APP_DATABASE_LOCAL,
+
+  // user: process.env.REACT_APP_USER,
+  // host: process.env.REACT_APP_HOST,
+  // password: process.env.REACT_APP_PASSWORD,
+  // database: process.env.REACT_APP_DATABASE,
 });
 
 app.post("/add-item", (req, res) => {
@@ -34,7 +39,7 @@ app.post("/add-item", (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        res.send("Item added");
+        res.send(result);
       }
     }
   );
@@ -74,6 +79,17 @@ app.put("/update", (req, res) => {
   );
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.delete("/delete/:itemid", (req, res) => {
+  const itemid = req.params.itemid;
+  db.query("DELETE FROM item_index WHERE itemid = ?", itemid, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.listen(process.env.PORT || PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

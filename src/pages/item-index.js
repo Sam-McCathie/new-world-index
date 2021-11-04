@@ -17,6 +17,8 @@ export const ItemIndex = () => {
   const [newStatus, setNewStatus] = useState();
   const [newFrom, setNewFrom] = useState();
 
+  console.log(allItems);
+
   const addItem = () => {
     setNewDropdown(false);
     Axios.post("http://localhost:3001/add-item", {
@@ -26,10 +28,10 @@ export const ItemIndex = () => {
       status: newStatus,
       fromWhat: newFrom,
       updated: moment().format("h:mm a - D MMM"),
-      priceHistory: JSON.stringify([
+      priceHistory: [
         {price: newValue, date: moment().format("h:mm a - D MMM")},
-      ]),
-    }).then(() => {
+      ],
+    }).then((response) => {
       setNewItem();
       setNewValue();
       setNewSource();
@@ -196,8 +198,8 @@ export const ItemIndex = () => {
                 <IndexItem
                   allItems={allItems}
                   setAllItems={setAllItems}
-                  itemid={item.itemid}
-                  key={item.item}
+                  id={item._id}
+                  key={item._id}
                   item={item.item}
                   value={item.value}
                   source={item.source}

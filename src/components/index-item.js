@@ -52,12 +52,11 @@ const IndexItem = (props) => {
     setEditStatus("default");
   };
 
-  const saveEdit = (itemid) => {
+  const saveEdit = (id) => {
     let sillyString = updatedValue;
     sillyString = parseFloat(sillyString).toFixed(2);
     let history = props.priceHistory;
     history.push({price: sillyString, date: updatedUpdated});
-    history = JSON.stringify(history);
 
     Axios.put("http://localhost:3001/update", {
       item: updatedItem ? updatedItem : props.item,
@@ -67,7 +66,7 @@ const IndexItem = (props) => {
       fromWhat: updatedFromWhat ? updatedFromWhat : props.fromWhat,
       updated: updatedValue ? moment().format("h:mm a - D MMM") : props.updated,
       priceHistory: updatedValue ? history : props.priceHistory,
-      itemid: itemid,
+      id: id,
     }).then((response) => {
       console.log(response);
       alert("Price Updated");
@@ -75,18 +74,19 @@ const IndexItem = (props) => {
     });
   };
 
-  const deleteItem = (itemid) => {
-    Axios.delete(`http://localhost:3001/delete/${itemid}`);
+  const deleteItem = (id) => {
+    Axios.delete(`http://localhost:3001/delete/${id}`);
+    console.log(id);
     alert("Item deleted");
     props.setAllItems(
       props.allItems.filter((i) => {
-        return i.itemid !== itemid;
+        return i._id !== id;
       })
     );
   };
 
   return (
-    <div className="item__index__sections" key={props.item}>
+    <div className="item__index__sections" key={props.id}>
       {editStatus === "default" ? (
         <button className="item__index__item__edit" onClick={startEdit}>
           E
@@ -101,7 +101,7 @@ const IndexItem = (props) => {
         <button
           className="item__index__item__edit"
           onClick={() => {
-            saveEdit(props.itemid);
+            saveEdit(props.id);
           }}
         >
           S
@@ -190,8 +190,8 @@ const IndexItem = (props) => {
         <button
           className="item__index__item__edit"
           onClick={() => {
-            deleteItem(props.itemid);
-            console.log(`Clicked remove - ${props.itemid}`);
+            deleteItem(props.id);
+            console.log(`Clicked remove - ${props.id}`);
           }}
         >
           D
@@ -206,7 +206,7 @@ const IndexItem = (props) => {
         <button
           className="item__index__item__edit"
           onClick={() => {
-            saveEdit(props.itemid);
+            saveEdit(props.id);
           }}
         >
           S

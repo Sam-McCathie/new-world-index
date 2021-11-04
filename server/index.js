@@ -23,13 +23,15 @@ app.post("/add-item", async (req, res) => {
 });
 
 app.get("/all-items", async (req, res) => {
-  ItemModel.find({}, (err, result) => {
+  await ItemModel.find({}, (err, result) => {
     if (err) {
       console.log(err);
     } else {
       res.json(result);
       console.log("completed");
     }
+  }).sort({
+    item: 1,
   });
 });
 

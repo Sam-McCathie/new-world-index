@@ -17,7 +17,7 @@ export const ItemIndex = () => {
   const [newStatus, setNewStatus] = useState();
   const [newFrom, setNewFrom] = useState();
 
-  console.log(allItems);
+  // https://www.tabnine.com/academy/javascript/how-to-format-date/ <- format date
 
   const addItem = () => {
     setNewDropdown(false);
@@ -28,9 +28,7 @@ export const ItemIndex = () => {
       status: newStatus,
       fromWhat: newFrom,
       updated: moment().format("h:mm a - D MMM"),
-      priceHistory: [
-        {price: newValue, date: moment().format("h:mm a - D MMM")},
-      ],
+      priceHistory: [{price: newValue, date: new Date()}],
     }).then((response) => {
       setNewItem();
       setNewValue();

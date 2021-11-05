@@ -30,9 +30,11 @@ app.get("/all-items", async (req, res) => {
       res.json(result);
       console.log("completed");
     }
-  }).sort({
-    item: 1,
-  });
+  })
+    .sort({
+      item: 1,
+    })
+    .clone();
 });
 
 app.put("/update", async (req, res) => {

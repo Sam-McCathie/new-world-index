@@ -7,13 +7,15 @@ moment().format();
 const IndexItem = (props) => {
   const [editStatus, setEditStatus] = useState("default");
 
-  const [updatedItem, setUpdatedItem] = useState("");
+  const [updatedItem, setUpdatedItem] = useState();
   const [updatedValue, setUpdatedValue] = useState();
   const [updatedSource, setUpdatedSource] = useState("");
   const [updatedStatus, setUpdatedStatus] = useState("");
   const [updatedFromWhat, setUpdatedFromWhat] = useState("");
   const [updatedUpdated, setUpdatedUpdated] = useState();
 
+  // Bug with save route only changing when value is changed. All other routes will only work if value is changed first
+  console.log(updatedItem);
   useEffect(() => {
     if (updatedValue !== undefined) {
       if (
@@ -34,6 +36,7 @@ const IndexItem = (props) => {
         editStatus === "save"
       ) {
         setEditStatus("edit");
+        console.log("edit - route");
       }
     }
   }, [
@@ -122,10 +125,9 @@ const IndexItem = (props) => {
           />
         )}
       </div>
-
       <div className="item__index__value__data">
         {editStatus === "default" ? (
-          props.value
+          props.value.toFixed(2)
         ) : (
           <input
             placeholder={props.value}

@@ -3,7 +3,7 @@ import "../styles/item-index.scss";
 import Axios from "axios";
 import IndexItem from "../components/index-item";
 
-var moment = require("moment"); // require
+var moment = require("moment");
 moment().format();
 
 export const ItemIndex = () => {
@@ -17,6 +17,7 @@ export const ItemIndex = () => {
   const [newStatus, setNewStatus] = useState();
   const [newFrom, setNewFrom] = useState();
 
+  console.log(allItems);
   // https://www.tabnine.com/academy/javascript/how-to-format-date/ <- format date
 
   const addItem = () => {
@@ -189,7 +190,6 @@ export const ItemIndex = () => {
           </div>
         ) : null}
         {/* Map the below -> each item will need its own state so it can be changed dynamically*/}
-        {console.log(allItems)}{" "}
         {allItems !== undefined
           ? allItems.map((item) => {
               return (

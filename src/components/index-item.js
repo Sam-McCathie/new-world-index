@@ -7,7 +7,7 @@ moment().format();
 const IndexItem = (props) => {
   const [editStatus, setEditStatus] = useState("default");
 
-  const [updatedItem, setUpdatedItem] = useState();
+  const [updatedItem, setUpdatedItem] = useState("");
   const [updatedValue, setUpdatedValue] = useState();
   const [updatedSource, setUpdatedSource] = useState("");
   const [updatedStatus, setUpdatedStatus] = useState("");
@@ -15,7 +15,8 @@ const IndexItem = (props) => {
   const [updatedUpdated, setUpdatedUpdated] = useState();
 
   // Bug with save route only changing when value is changed. All other routes will only work if value is changed first
-  console.log(updatedItem);
+
+  // .toFixed(2)
   useEffect(() => {
     if (updatedValue !== undefined) {
       if (
@@ -63,7 +64,7 @@ const IndexItem = (props) => {
 
     Axios.put("http://localhost:3001/update", {
       item: updatedItem ? updatedItem : props.item,
-      value: updatedValue ? parseFloat(updatedValue).toFixed(2) : props.value,
+      value: updatedValue ? updatedValue : props.value,
       source: updatedSource ? updatedSource : props.source,
       status: updatedStatus ? updatedStatus : props.status,
       fromWhat: updatedFromWhat ? updatedFromWhat : props.fromWhat,
@@ -125,17 +126,18 @@ const IndexItem = (props) => {
           />
         )}
       </div>
+      {console.log(typeof updatedValue)}
       <div className="item__index__value__data">
         {editStatus === "default" ? (
           props.value.toFixed(2)
         ) : (
           <input
-            placeholder={props.value}
+            placeholder={props.value.toFixed(2)}
             className="item__index__input"
             type="number"
             value={updatedValue}
             onChange={function (e) {
-              setUpdatedValue(e.target.value);
+              setUpdatedValue(parseFloat(e.target.value));
             }}
           />
         )}
@@ -156,7 +158,7 @@ const IndexItem = (props) => {
           />
         )}
       </div>
-
+      {console.log(props.value)}
       <div className="item__index__status__data">
         {editStatus === "default" ? (
           props.status

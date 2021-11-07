@@ -1,4 +1,4 @@
-export const item = [
+export const items = [
   {
     item: "Greenwood",
     value: 0.15,
@@ -16,7 +16,7 @@ export const item = [
   },
   {
     item: "Iron Ore",
-    value: 0.37,
+    value: 0.15,
     source: "mineboy",
     status: "Raw",
     from: "Iron Nodes",
@@ -25,5 +25,13 @@ export const item = [
       {price: 0.15, date: "27/10"},
       {price: 0.69, date: "26/10"},
     ],
+  },
+  {
+    item: "Iron Ingot",
+    value: 0.69,
+  },
+  {
+    item: "Steel Ingot",
+    value: 0.56,
   },
 ];

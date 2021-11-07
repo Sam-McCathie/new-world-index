@@ -2,10 +2,10 @@ import React from "react";
 import {Line} from "react-chartjs-2";
 
 //Sample Data
-import {item} from "../data/items";
+import {items} from "../data/items";
 
 //Array position to change -> hard coded for now
-const selectedItem = item[0];
+const selectedItem = items[0];
 
 let prices = [];
 for (let i = 0; i < selectedItem.priceHistory.length; i++) {

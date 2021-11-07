@@ -1,0 +1,32 @@
+.smelting {
+  //   align-content: center;
+  &__layout {
+    display: flex;
+  }
+  &__item {
+    &__container {
+      border: green solid 2px;
+      width: 500px;
+      height: 600px;
+    }
+    &__header__item,
+    &__item {
+      width: 220px;
+    }
+    &__header__value,
+    &__value {
+      width: 100px;
+      text-align: center;
+    }
+    &__header__level,
+    &__level {
+      width: 50px;
+      text-align: center;
+    }
+  }
+  &__recipe {
+    border: blue solid 2px;
+    width: 600px;
+    height: 600px;
+  }
+}

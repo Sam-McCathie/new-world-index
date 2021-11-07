@@ -14,7 +14,9 @@ export const index = () => {
           <button>Inventory Estimate</button>
         </div>
         <div>
-          <button>Refining Calculator</button>
+          <Link to="/refine-&-craft">
+            <button>Refining & Crafting</button>
+          </Link>
           <button>Crafting Calculator</button>
         </div>
         <div>

@@ -24,7 +24,7 @@ export const ItemIndex = () => {
     setNewDropdown(false);
     Axios.post("http://localhost:3001/add-item", {
       item: newItem,
-      value: newValue,
+      value: parseFloat(newValue),
       source: newSource,
       status: newStatus,
       fromWhat: newFrom,
@@ -40,7 +40,7 @@ export const ItemIndex = () => {
         ...allItems,
         {
           item: newItem,
-          value: newValue,
+          value: parseFloat(newValue),
           source: newSource,
           status: newStatus,
           fromWhat: newFrom,

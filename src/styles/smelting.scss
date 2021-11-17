@@ -3,6 +3,9 @@
   &__layout {
     display: flex;
   }
+  &__subheading {
+    margin: 10px 0 0 0;
+  }
   &__item {
     &__container {
       border: green solid 2px;

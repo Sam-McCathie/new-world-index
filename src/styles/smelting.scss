@@ -6,6 +6,7 @@
   &__subheading {
     margin: 10px 0 0 0;
   }
+  // Items - Left Container
   &__item {
     &__container {
       border: green solid 2px;
@@ -27,9 +28,51 @@
       text-align: center;
     }
   }
+  // Recipe - Right Container
   &__recipe {
     border: blue solid 2px;
-    width: 600px;
+    width: 800px;
     height: 600px;
+    &__input {
+      width: 50px;
+      margin-left: 5px;
+      text-align: center;
+    }
+
+    // i = item
+    &__item,
+    &__item_i {
+      width: 220px;
+    }
+    &__item_i {
+      font-weight: 900;
+      text-decoration: underline;
+    }
+    &__item__value,
+    &__item__value_i {
+      width: 100px;
+      text-align: center;
+    }
+    &__required,
+    &__required_i {
+      width: 100px;
+      text-align: center;
+    }
+    &__cost,
+    &__cost_i {
+      width: 200px;
+      text-align: center;
+    }
+    //
+    &__calculations,
+    &__calculations_i {
+      margin: 0 0 0 290px;
+      width: 130px;
+    }
+    &__bonus__input {
+      width: 30px;
+      text-align: center;
+      margin: 0 5px 0 70px;
+    }
   }
 }

@@ -34,7 +34,9 @@ export const ItemIndex = () => {
       status: newStatus,
       fromWhat: newFrom,
       updated: moment().format("h:mm a - D MMM"),
-      priceHistory: [{price: newValue, date: new Date()}],
+      priceHistory: [
+        {price: newValue, date: moment().format("h:mm a - D MMM")},
+      ],
     }).then((response) => {
       setNewItem();
       setNewValue();

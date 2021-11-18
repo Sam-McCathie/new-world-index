@@ -23,7 +23,7 @@ export const Smelting = () => {
   const [starmetalOre, setStarmetalOre] = useState();
   const [orichalecumIngot, setOrichalecumIngot] = useState();
   const [orichalecumOre, setOrichalecumOre] = useState();
-  const [asmodeumIngot, setAsmodeumIngot] = useState();
+  const [asmodeum, setAsmodeum] = useState();
   const [tolvium, setTolvium] = useState();
   const [cinnibar, setCinnibar] = useState();
   const [voidbentIngot, setVoidbentIngot] = useState();
@@ -44,7 +44,6 @@ export const Smelting = () => {
   useEffect(() => {
     Axios.get("http://localhost:3001/all-items").then((response) => {
       let items = response.data;
-      setCharcoal(0.19);
       setAllItems(items);
       for (let i = 0; i <= items.length - 1; i++) {
         if (items[i].item === "Charcoal") {
@@ -65,11 +64,11 @@ export const Smelting = () => {
           setStarmetalIngot(items[i].value);
         } else if (items[i].item === "Starmetal Ore") {
           setStarmetalOre(items[i].value);
-        } else if (items[i].item === "Asmodeum Ingot") {
-          setAsmodeumIngot(items[i].value);
-        } else if (items[i].item === "Orichalecum Ingot") {
+        } else if (items[i].item === "Asmodeum") {
+          setAsmodeum(items[i].value);
+        } else if (items[i].item === "Orichalcum Ingot") {
           setOrichalecumIngot(items[i].value);
-        } else if (items[i].item === "Orichalecum Ore") {
+        } else if (items[i].item === "Orichalcum Ore") {
           setOrichalecumOre(items[i].value);
         } else if (items[i].item === "Tolvium") {
           setTolvium(items[i].value);
@@ -136,7 +135,7 @@ export const Smelting = () => {
           <SmeltingItem
             item="Steel Ingot"
             value={steelIngot}
-            level="0"
+            level="50"
             clickFunc={() => {
               setActiveItem("Steel Ingot");
             }}
@@ -144,7 +143,7 @@ export const Smelting = () => {
           <SmeltingItem
             item="Starmetal Ingot"
             value={starmetalIngot}
-            level="0"
+            level="100"
             clickFunc={() => {
               setActiveItem("Starmetal Ingot");
             }}
@@ -152,10 +151,18 @@ export const Smelting = () => {
           <SmeltingItem
             item="Orichalecum Ingot"
             value={orichalecumIngot}
-            level="0"
+            level="150"
             clickFunc={() => {
               setActiveItem("Orichalecum Ingot");
             }}
+          />
+          <SmeltingItem
+            item="Asmodeum"
+            value={asmodeum}
+            level="200"
+            // clickFunc={() => {
+            //   setActiveItem("Orichalecum Ingot");
+            // }}
           />
           <h3 className="smelting__subheading">Precious Metals</h3>
           <div className="smelting__layout">
@@ -174,7 +181,7 @@ export const Smelting = () => {
           <SmeltingItem
             item="Gold Ingot"
             value={goldIngot}
-            level="0"
+            level="50"
             clickFunc={() => {
               setActiveItem("Gold Ingot");
             }}
@@ -182,7 +189,7 @@ export const Smelting = () => {
           <SmeltingItem
             item="Platinum Ingot"
             value={platinumIngot}
-            level="0"
+            level="100"
             clickFunc={() => {
               setActiveItem("Platinum Ingot");
             }}

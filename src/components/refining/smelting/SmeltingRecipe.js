@@ -20,7 +20,9 @@ export const SmeltingRecipe = (props) => {
   return (
     <div>
       <div className="smelting__layout">
-        <p>{props.item} | volume =</p>
+        <p>
+          {props.item} ({props.value} each)| volume =
+        </p>
         <input
           placeholder="1 +"
           type="number"

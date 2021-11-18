@@ -45,7 +45,12 @@ export const PriceModal = (props) => {
   return (
     <div className="price__history__modal__background">
       <div className="price__history__modal__container">
-        <button onClick={props.modalClose}>X</button>
+        <button
+          className="price__history__modal__close"
+          onClick={props.modalClose}
+        >
+          X
+        </button>
         <Line data={data} options={options} />
       </div>
     </div>

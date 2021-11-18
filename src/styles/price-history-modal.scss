@@ -11,5 +11,12 @@
   &__container {
     width: 800px;
     background-color: #d2d2d2;
+    position: relative;
+    padding-top: 20px;
+  }
+  &__close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
   }
 }

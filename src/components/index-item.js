@@ -111,7 +111,10 @@ const IndexItem = (props) => {
           S
         </button>
       ) : null}
-      <div className="item__index__data__hover" onClick={props.priceModalFunc}>
+      <div
+        className="item__index__data__hover"
+        onClick={editStatus === "default" ? props.priceModalFunc : null}
+      >
         <div className="item__index__item__data">
           {editStatus === "default" ? (
             props.item

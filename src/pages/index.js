@@ -19,11 +19,6 @@ export const index = () => {
           </Link>
           <button>Crafting Calculator</button>
         </div>
-        <div>
-          <Link to="/price-history">
-            <button>TEST - Price History</button>
-          </Link>
-        </div>
       </div>
     </div>
   );

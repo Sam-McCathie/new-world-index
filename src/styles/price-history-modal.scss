@@ -1,0 +1,15 @@
+.price__history__modal {
+  &__background {
+    width: 100vw;
+    height: 110vw;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(169, 169, 169, 0.8);
+  }
+  &__container {
+    width: 800px;
+    background-color: #d2d2d2;
+  }
+}

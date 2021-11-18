@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import "../styles/item-index.scss";
 import Axios from "axios";
 import IndexItem from "../components/index-item";
+import {PriceModal} from "./PriceModal";
 
 var moment = require("moment");
 moment().format();
@@ -16,6 +17,10 @@ export const ItemIndex = () => {
   const [newSource, setNewSource] = useState();
   const [newStatus, setNewStatus] = useState();
   const [newFrom, setNewFrom] = useState();
+
+  const [priceModal, setPriceModal] = useState(false);
+  const [modalItem, setModalItem] = useState();
+  const [priceHistory, setPriceHistroy] = useState();
 
   console.log(allItems);
   // https://www.tabnine.com/academy/javascript/how-to-format-date/ <- format date
@@ -72,8 +77,18 @@ export const ItemIndex = () => {
 
   return (
     <div>
+      {priceModal ? (
+        <PriceModal
+          item={modalItem}
+          priceHistory={priceHistory}
+          modalClose={() => {
+            setPriceModal(false);
+          }}
+        />
+      ) : null}
       <h1>403's New World Index</h1>
       <h3>Item Index</h3>
+
       <div className="item__index">
         <div className="item__index__sections">
           {!newDropdown ? (
@@ -205,6 +220,11 @@ export const ItemIndex = () => {
                   fromWhat={item.fromWhat}
                   updated={item.updated}
                   priceHistory={item.priceHistory}
+                  priceModalFunc={() => {
+                    setPriceModal(true);
+                    setModalItem(item.item);
+                    setPriceHistroy(item.priceHistory);
+                  }}
                 />
               );
             })

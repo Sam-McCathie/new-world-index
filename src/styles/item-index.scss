@@ -57,6 +57,15 @@
     border-right: 1px solid #000000;
   }
 
+  &__data__hover {
+    display: flex;
+    cursor: pointer;
+    &:hover {
+      transition: 0.8s;
+      background-color: pink;
+    }
+  }
+
   //Column widths
   &__item {
     &__heading,

@@ -111,85 +111,87 @@ const IndexItem = (props) => {
           S
         </button>
       ) : null}
-      <div className="item__index__item__data">
-        {editStatus === "default" ? (
-          props.item
-        ) : (
-          <input
-            placeholder={props.item}
-            className="item__index__input"
-            type="text"
-            value={updatedItem}
-            onChange={function (e) {
-              setUpdatedItem(e.target.value);
-            }}
-          />
-        )}
-      </div>
-      {console.log(typeof updatedValue)}
-      <div className="item__index__value__data">
-        {editStatus === "default" ? (
-          props.value.toFixed(2)
-        ) : (
-          <input
-            placeholder={props.value.toFixed(2)}
-            className="item__index__input"
-            type="number"
-            value={updatedValue}
-            onChange={function (e) {
-              setUpdatedValue(parseFloat(e.target.value));
-            }}
-          />
-        )}
-      </div>
+      <div className="item__index__data__hover" onClick={props.priceModalFunc}>
+        <div className="item__index__item__data">
+          {editStatus === "default" ? (
+            props.item
+          ) : (
+            <input
+              placeholder={props.item}
+              className="item__index__input"
+              type="text"
+              value={updatedItem}
+              onChange={function (e) {
+                setUpdatedItem(e.target.value);
+              }}
+            />
+          )}
+        </div>
+        {console.log(typeof updatedValue)}
+        <div className="item__index__value__data">
+          {editStatus === "default" ? (
+            props.value.toFixed(2)
+          ) : (
+            <input
+              placeholder={props.value.toFixed(2)}
+              className="item__index__input"
+              type="number"
+              value={updatedValue}
+              onChange={function (e) {
+                setUpdatedValue(parseFloat(e.target.value));
+              }}
+            />
+          )}
+        </div>
 
-      <div className="item__index__profession__data">
-        {editStatus === "default" ? (
-          props.source
-        ) : (
-          <input
-            placeholder={props.source}
-            className="item__index__input"
-            type="text"
-            value={updatedSource}
-            onChange={function (e) {
-              setUpdatedSource(e.target.value);
-            }}
-          />
-        )}
+        <div className="item__index__profession__data">
+          {editStatus === "default" ? (
+            props.source
+          ) : (
+            <input
+              placeholder={props.source}
+              className="item__index__input"
+              type="text"
+              value={updatedSource}
+              onChange={function (e) {
+                setUpdatedSource(e.target.value);
+              }}
+            />
+          )}
+        </div>
+        {console.log(props.value)}
+        <div className="item__index__status__data">
+          {editStatus === "default" ? (
+            props.status
+          ) : (
+            <input
+              placeholder={props.status}
+              className="item__index__input"
+              type="text"
+              value={updatedStatus}
+              onChange={function (e) {
+                setUpdatedStatus(e.target.value);
+              }}
+            />
+          )}
+        </div>
+        <div className="item__index__from__data">
+          {editStatus === "default" ? (
+            props.fromWhat
+          ) : (
+            <input
+              placeholder={props.fromWhat}
+              className="item__index__input"
+              type="text"
+              value={updatedFromWhat}
+              onChange={function (e) {
+                setUpdatedFromWhat(e.target.value);
+              }}
+            />
+          )}
+        </div>
+        <div className="item__index__updated__data">{props.updated}</div>
       </div>
-      {console.log(props.value)}
-      <div className="item__index__status__data">
-        {editStatus === "default" ? (
-          props.status
-        ) : (
-          <input
-            placeholder={props.status}
-            className="item__index__input"
-            type="text"
-            value={updatedStatus}
-            onChange={function (e) {
-              setUpdatedStatus(e.target.value);
-            }}
-          />
-        )}
-      </div>
-      <div className="item__index__from__data">
-        {editStatus === "default" ? (
-          props.fromWhat
-        ) : (
-          <input
-            placeholder={props.fromWhat}
-            className="item__index__input"
-            type="text"
-            value={updatedFromWhat}
-            onChange={function (e) {
-              setUpdatedFromWhat(e.target.value);
-            }}
-          />
-        )}
-      </div>
-      <div className="item__index__updated__data">{props.updated}</div>
       {editStatus === "default" ? (
         <button
           className="item__index__item__edit"

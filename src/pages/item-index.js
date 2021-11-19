@@ -25,6 +25,8 @@ export const ItemIndex = () => {
   // FORMAT date to change colour of price based on how up to date the price is
   // https://www.tabnine.com/academy/javascript/how-to-format-date/
 
+  console.log(new Date());
+
   const addItem = () => {
     setNewDropdown(false);
     Axios.post("http://localhost:3001/add-item", {
@@ -33,11 +35,10 @@ export const ItemIndex = () => {
       source: newSource,
       status: newStatus,
       fromWhat: newFrom,
-      updated: moment().format("h:mm a - D MMM"),
-      priceHistory: [
-        {price: newValue, date: moment().format("h:mm a - D MMM")},
-      ],
+      updated: new Date(),
+      priceHistory: [{price: newValue, date: new Date()}],
     }).then((response) => {
+      console.log(response);
       setNewItem();
       setNewValue();
       setNewSource();

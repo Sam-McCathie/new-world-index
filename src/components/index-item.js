@@ -15,8 +15,6 @@ const IndexItem = (props) => {
   const [updatedUpdated, setUpdatedUpdated] = useState();
 
   // Bug with save route only changing when value is changed. All other routes will only work if value is changed first
-
-  // .toFixed(2)
   useEffect(() => {
     if (updatedValue !== undefined) {
       if (
@@ -37,7 +35,6 @@ const IndexItem = (props) => {
         editStatus === "save"
       ) {
         setEditStatus("edit");
-        console.log("edit - route");
       }
     }
   }, [
@@ -72,15 +69,12 @@ const IndexItem = (props) => {
       priceHistory: updatedValue ? history : props.priceHistory,
       id: id,
     }).then((response) => {
-      console.log(response);
-      alert("Price Updated");
       window.location.reload();
     });
   };
 
   const deleteItem = (id) => {
     Axios.delete(`http://localhost:3001/delete/${id}`);
-    console.log(id);
     alert("Item deleted");
     props.setAllItems(
       props.allItems.filter((i) => {
@@ -88,6 +82,24 @@ const IndexItem = (props) => {
       })
     );
   };
+
+  const [momentVal, setMomentVal] = useState(props.updated);
+  // const current = new Date();
+  // let test = momentVal.diff(current, "days");
+
+  // console.log(test);
+
+  // console.log(current);
+
+  // if (moment(momentVal).format("h:mm a - D MMM") !== "Invalid date") {
+
+  //   console.log(momentConst);
+  //   console.log(`New`);
+  // } else {
+  //   console.log("OLD");
+  // }
+
+  // Compare -> change colour based on days since
 
   return (
     <div className="item__index__sections" key={props.id}>
@@ -130,7 +142,6 @@ const IndexItem = (props) => {
             />
           )}
         </div>
-        {console.log(typeof updatedValue)}
         <div className="item__index__value__data">
           {editStatus === "default" ? (
             props.value.toFixed(2)
@@ -162,7 +173,6 @@ const IndexItem = (props) => {
             />
           )}
         </div>
-        {console.log(props.value)}
         <div className="item__index__status__data">
           {editStatus === "default" ? (
             props.status
@@ -193,7 +203,12 @@ const IndexItem = (props) => {
             />
           )}
         </div>
-        <div className="item__index__updated__data">{props.updated}</div>
+        {/* <div className="item__index__updated__data">{momentVal}</div> */}
+        <div className="item__index__updated__data">
+          {moment(momentVal).format("h:mm a - D MMM") !== "Invalid date"
+            ? moment(momentVal).format("h:mm a - D MMM")
+            : momentVal}
+        </div>
       </div>
       {editStatus === "default" ? (
         <button

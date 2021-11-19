@@ -2,10 +2,8 @@ import React from "react";
 import {Line} from "react-chartjs-2";
 import "../styles/price-history-modal.scss";
 
-//Sample Data
-import {items} from "../data/items";
-
-//Array position to change -> hard coded for now
+var moment = require("moment");
+moment().format();
 
 const options = {
   scales: {
@@ -25,9 +23,12 @@ export const PriceModal = (props) => {
 
   let dates = [];
   for (let i = 0; i < history.length; i++) {
-    dates.push(history[i].date);
+    if (moment(history[i].date).format("h:mm a - D MMM") !== "Invalid date") {
+      dates.push(moment(history[i].date).format("h:mm a - D MMM"));
+    } else {
+      dates.push(history[i].date);
+    }
   }
-  console.log(props.priceHistory);
 
   const data = {
     labels: dates,

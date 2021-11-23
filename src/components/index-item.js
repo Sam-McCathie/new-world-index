@@ -6,6 +6,7 @@ moment().format();
 
 const IndexItem = (props) => {
   const [editStatus, setEditStatus] = useState("default");
+  const [colourIndicator, setColourIndicator] = useState("#FAB0B0"); // red
 
   const [updatedItem, setUpdatedItem] = useState("");
   const [updatedValue, setUpdatedValue] = useState();
@@ -83,21 +84,26 @@ const IndexItem = (props) => {
     );
   };
 
-  const [momentVal, setMomentVal] = useState(props.updated);
-  // const current = new Date();
-  // let test = momentVal.diff(current, "days");
+  // handles old dates entered prior to date format change
+  useEffect(() => {
+    if (moment(props.updated).format("h:mm a - D MMM") !== "Invalid date") {
+      const d1 = new Date(Date.parse(props.updated));
+      const d2 = new Date();
 
-  // console.log(test);
+      const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+      const utc1 = Date.UTC(d1.getFullYear(), d1.getMonth(), d1.getDate());
+      const utc2 = Date.UTC(d2.getFullYear(), d2.getMonth(), d2.getDate());
+      const result = Math.floor((utc2 - utc1) / _MS_PER_DAY);
 
-  // console.log(current);
-
-  // if (moment(momentVal).format("h:mm a - D MMM") !== "Invalid date") {
-
-  //   console.log(momentConst);
-  //   console.log(`New`);
-  // } else {
-  //   console.log("OLD");
-  // }
+      if (result === 0) {
+        setColourIndicator("#A8D894"); //green
+      } else if (result <= 5) {
+        setColourIndicator("#F9CD95"); // orange
+      }
+    } else {
+      console.log("OLD Date");
+    }
+  }, []);
 
   // Compare -> change colour based on days since
 
@@ -142,7 +148,10 @@ const IndexItem = (props) => {
             />
           )}
         </div>
-        <div className="item__index__value__data">
+        <div
+          className="item__index__value__data"
+          style={{backgroundColor: colourIndicator}}
+        >
           {editStatus === "default" ? (
             props.value.toFixed(2)
           ) : (
@@ -205,9 +214,9 @@ const IndexItem = (props) => {
         </div>
         {/* <div className="item__index__updated__data">{momentVal}</div> */}
         <div className="item__index__updated__data">
-          {moment(momentVal).format("h:mm a - D MMM") !== "Invalid date"
-            ? moment(momentVal).format("h:mm a - D MMM")
-            : momentVal}
+          {moment(props.updated).format("h:mm a - D MMM") !== "Invalid date"
+            ? moment(props.updated).format("h:mm a - D MMM")
+            : props.updated}
         </div>
       </div>
       {editStatus === "default" ? (

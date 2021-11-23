@@ -22,11 +22,6 @@ export const ItemIndex = () => {
   const [modalItem, setModalItem] = useState();
   const [priceHistory, setPriceHistroy] = useState();
 
-  // FORMAT date to change colour of price based on how up to date the price is
-  // https://www.tabnine.com/academy/javascript/how-to-format-date/
-
-  console.log(new Date());
-
   const addItem = () => {
     setNewDropdown(false);
     Axios.post("http://localhost:3001/add-item", {
